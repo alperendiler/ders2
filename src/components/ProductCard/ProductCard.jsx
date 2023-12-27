@@ -1,7 +1,20 @@
-import React from 'react'
+import axios from 'axios';
 import {Link} from "react-router-dom";
 
-export default function ProductCard(props) {
+export default function ProductCard(props ) {
+
+
+  const Delete = async () => {
+    try {
+      await axios.delete(`https://dummyjson.com/products/${props.product.id}`);
+      console.log('ürün silindi');
+      console.log(props.product.id)
+      props.onDelete(props.product);
+    } catch (error) {
+      console.error('Hataa:', error);
+    }
+  };
+
   return (
 
     <div className="card">
@@ -10,12 +23,16 @@ export default function ProductCard(props) {
         <h5 className="card-title">{props.product.title}</h5>
         <p className="card-text">{props.product.description}</p>
         <Link
-            to={"/product-detail?id=" + props.product.id}
+            to={"/product-detail/" + props.product.id}
             className="btn btn-primary"
         >
             Details
         </Link>
-        <button className="btn btn-danger">Sil</button>
+        <button onClick={Delete} className="btn btn-danger">Sil</button>
+        <br />
+        <Link  to={"/product-add/" + props.product.id}
+            className="btn btn-success">Ekle</Link>
+
     </div>
 </div>
   )

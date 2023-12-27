@@ -16,6 +16,8 @@ export default function Homepage() {
 		makeHttpCall();
 	}, []);
 
+	
+
 	const makeAsyncCall = async () => {
 		// myAsyncFunction()
 		// .then(response => {
@@ -72,6 +74,9 @@ export default function Homepage() {
 		let response = await axios.get("https://dummyjson.com/products");
 		setProducts(response.data.products);
 	};
+	
+	
+	
   return (
     <div className="container mt-5">
     <div className="row">
